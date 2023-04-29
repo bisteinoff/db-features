@@ -1,0 +1,108 @@
+/* DB Settings Styling */
+
+.db-features-admin h1 {
+    font-size: 3em;
+}
+
+.db-features-admin h2 {
+    font-size: 2em;
+    margin-top: 2em;
+}
+
+.db-features-description p {
+    color: #525d65;
+    font-size: 1.5em;
+    margin: .5em 0;
+}
+
+.db-features-admin .db-features-table {
+    -ms-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    background: rgba(255,255,255,.75);
+    width: 100%;
+}
+
+.db-features-admin .db-features-table tr:first-child > :first-child {
+    -ms-border-radius-topleft: 25px;
+    -moz-border-radius-topleft: 25px;
+    -webkit-border-top-left-radius: 25px;
+    border-top-left-radius: 25px;
+}
+
+.db-features-admin .db-features-table tr:first-child > :last-child {
+    -ms-border-radius-topright: 25px;
+    -moz-border-radius-topright: 25px;
+    -webkit-border-top-right-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+.db-features-admin .db-features-table tr:last-child > :first-child {
+    -ms-border-radius-bottomleft: 25px;
+    -moz-border-radius-bottomleft: 25px;
+    -webkit-border-bottom-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.db-features-admin .db-features-table tr:last-child > :last-child {
+    -ms-border-radius-bottomright: 25px;
+    -moz-border-radius-bottomright: 25px;
+    -webkit-border-bottom-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.db-features-admin .db-features-table th,
+.db-features-admin .db-features-table td {
+    border-left: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 10px 30px;
+}
+
+.db-features-field-description {
+    font-size: .9em;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.db-features-items {
+    display: -ms-flex;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.db-features-item {
+    -ms-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #f3f3f3;
+    width: calc(31.33333333% - 20px);
+    margin: 10px 1%;
+    padding: 20px 10px;
+}
+
+.db-features-item input {
+    width: 100%;
+}
+
+.db-center {
+    text-align: center;
+}
+
+@media (max-width: 1350px) {
+
+    .db-features-item { width: calc(48% - 20px); }
+
+} /* end max-width: 1250px */
+
+@media (max-width: 768px) {
+
+    .db-features-item { width: calc(98% - 20px); }
+
+} /* end max-width: 1250px */
