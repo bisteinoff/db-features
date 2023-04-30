@@ -91,6 +91,27 @@
     width: 100%;
 }
 
+.db-features-add {
+    display: -ms-flex;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    border: 2px dashed #999;
+    background: #fff;
+    font-size: 2em;
+    padding: 100px 0;
+}
+
+.db-features-add:hover {
+    background: #f3f3f3;
+    cursor: pointer;
+}
+
+.db-features-add:active {
+    background: #e9e9e9;
+}
+
 .db-center {
     text-align: center;
 }

@@ -3,7 +3,7 @@
 Plugin Name: DB Features
 Plugin URI: https://github.com/bisteinoff/db-features/
 Description: The plugin is used for the basic website settings
-Version: 1.0
+Version: 1.1
 Author: Denis Bisteinov
 Author URI: https://bisteinoff.com
 License: GPL2
@@ -32,6 +32,7 @@ License: GPL2
 		function dbFeatures()
 		{
 
+			add_option( 'db_features_num', 1 ); // number of features
 			add_option( 'db_features_img_0' );
 			add_option( 'db_features_headline_0' );
 			add_option( 'db_features_text_0' );
@@ -39,6 +40,7 @@ License: GPL2
 			add_filter( 'plugin_action_links_db-features/index.php', array(&$this, 'db_features_link') );
 			add_action( 'admin_menu', array (&$this, 'admin') );
 
+			add_action( 'admin_footer', array (&$this, 'admin_footer_js') );
 			add_action( 'admin_footer', function() {
 							wp_enqueue_style( 'db-features-admin', plugin_dir_url( __FILE__ ) . 'css/admin.css' );
 							wp_enqueue_script( 'db-features-admin', plugin_dir_url( __FILE__ ) . 'js/admin.js', null, false, true );
@@ -49,7 +51,6 @@ License: GPL2
 			if (function_exists ('add_shortcode') )
 			{
 
-				// Phone Plain Text
 				add_shortcode('db-features', function() {
 					return sanitize_text_field ( get_option('db_features_text_0') );
 				});
@@ -113,6 +114,29 @@ License: GPL2
 
 			return $links;
 
+		}
+
+		function admin_footer_js()
+		{
+			?>
+				<script type="text/javascript">
+					let dbFeaturesTexts = Array (
+						"<?php _e('Image' , 'db-features') ?>",
+						"<?php _e('Headline' , 'db-features') ?>",
+						"<?php _e('Text' , 'db-features') ?>"
+						);
+                    let dbFeaturesTextarea = `<?php
+							wp_editor( '', 'db-features-text-xxxxx', array(
+								'textarea_name' => 'text_xxxxx',
+								'textarea_rows' => 10,
+								'wpautop' => false,
+								'media_buttons' => false
+								)
+							);
+						?>`;
+				</script>
+			<?php
+			
 		}
 
 	}

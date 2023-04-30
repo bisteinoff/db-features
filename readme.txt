@@ -4,7 +4,7 @@ Donate link: https://bisteinoff.com
 Tags: features
 Requires at least: 4.6
 Tested up to: 6.2
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPL2
 
 The plugin is used to make a block of features for your website.
@@ -26,6 +26,9 @@ The plugin is used to make a block of features for your website. You will be abl
 The block of features helps to demonstrate your potential clients the reasons why to buy your products or order your services.
 
 == Changelog ==
+
+= 1.1 =
+* The possibility to add new items to the list of features
 
 = 1.0 =
 * Initial release.
