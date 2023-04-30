@@ -38,9 +38,13 @@
 			add_option( 'db_features_headline_'.$i );
 			add_option( 'db_features_text_'.$i );
 
-			if ( $_FILES['img_'.$i] || $_POST['headline_'.$i] || $_POST['text_'.$i] )
+			if ( $_POST['img_id_'.$i] || $_FILES['img_'.$i] || $_POST['headline_'.$i] || $_POST['text_'.$i] )
 			{
-				// Image
+				// Image: first, we check the value of the hidden input
+				$db_features_img[$i] = (int) $_POST['img_id_'.$i];
+				update_option ( 'db_features_img_'.$i, $db_features_img[$i] );
+
+				// Image: second, we check if a new image should be uploaded
 				if ( !empty ( $_FILES['img_'.$i] ))
 				{
 					require( ABSPATH . 'wp-load.php' );
@@ -53,7 +57,7 @@
 
 					if ( empty( $db_upload['error'] ) )
 						{
-							$db_img_id = wp_insert_attachment(
+							$db_features_img[$i] = wp_insert_attachment(
 								array(
 									'guid'           => $db_upload['url'],
 									'post_mime_type' => $db_upload['type'],
@@ -64,16 +68,16 @@
 								$db_upload['file']
 							);
 
-							if( !is_wp_error( $db_img_id ) && $db_img_id )
+							if( !is_wp_error( $db_features_img[$i] ) && $db_features_img[$i] )
 							{
 								require_once( ABSPATH . 'wp-admin/includes/image.php' );
 
 								wp_update_attachment_metadata(
-									$db_img_id,
-									wp_generate_attachment_metadata( $db_img_id, $db_upload['file'] )
+									$db_features_img[$i],
+									wp_generate_attachment_metadata( $db_features_img[$i], $db_upload['file'] )
 								);
 
-								update_option ( 'db_features_img_' . $i, $db_img_id );
+								update_option ( 'db_features_img_' . $i, $db_features_img[$i] );
 							}
 
 						}
@@ -125,13 +129,28 @@
 						$i = -1;
 						while ( ++$i < $db_features_num ) :
 					?>
-						<div id="db-features-item-<?php echo $i ?>" class="db-features-item">
+						<div id="db_features_item_<?php echo $i ?>" class="db-features-item">
 
 							<h3><?php _e('Image' , 'db-features') ?></h3>
 
-								<?php if ( !empty ( $db_features_img[$i] ) ) echo wp_get_attachment_image ( $db_features_img[$i], 'medium' ); ?>
+								<div class="db-features-image">
+									<div class="db-features-image-inner">
+										<?php
+											if ( !empty ( $db_features_img[$i] ) ) {
+										?>
+												<div id="db_features_close_<?php echo $i ?>" class="db-features-close">
+													<div class="db-close-1"></div>
+													<div class="db-close-2"></div>
+													<label><?php _e('delete' , 'db-features') ?></label>
+												</div>
+										<?php
+												echo wp_get_attachment_image ( $db_features_img[$i], 'medium' );
+											}
+										?>
+									</div>
+								</div>
 								<input type="file" name="img_<?php echo $i ?>" />
-								<input type="hidden" name="img_id_<?php echo $i ?>"
+								<input type="hidden" name="img_id_<?php echo $i ?>" id="db_features_img_id_<?php echo $i ?>"
 								       value="<?php echo $db_features_img[$i] ?>" />
 
 							<h3><?php _e('Headline' , 'db-features') ?></h3>

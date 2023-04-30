@@ -1,6 +1,6 @@
 /* DB FEATURES SCRIPTS */
 
-// добавить input по нажатию кнопки
+// add new block of features
 
 const dbFeaturesAdd = document.getElementById("db_features_add")
 const dbFeaturesItems = document.getElementById("db_features_items")
@@ -16,7 +16,7 @@ dbFeaturesAdd.addEventListener( 'click', function(){
     dbFeaturesItems.insertBefore( node, dbFeaturesAdd )
 
     node.classList.add("db-features-item" )
-    node.setAttribute("id",  "db-features-item-" + num )
+    node.setAttribute("id",  "db_features_item_" + num )
 
     node.innerHTML = '<h3>' + dbFeaturesTexts[0] + '</h3>' +
         '<input type="file" name="img_' + num + '" />' +
@@ -43,3 +43,19 @@ dbFeaturesAdd.addEventListener( 'click', function(){
     dbFeaturesNum.value = num + 1
 
 })
+
+
+
+// delete image
+
+const dbFeaturesClose = dbFeaturesItems.getElementsByClassName("db-features-close")
+
+for (let i = 0; i < dbFeaturesClose.length; i++) {
+    dbFeaturesClose[i].addEventListener('click', function(){
+        let id = this.getAttribute("id")
+        let img = id.replace("close" , "img_id")
+
+        this.parentNode.remove()
+        document.getElementById(img).value = 0
+    })
+}

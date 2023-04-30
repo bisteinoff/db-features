@@ -3,7 +3,7 @@
 Plugin Name: DB Features
 Plugin URI: https://github.com/bisteinoff/db-features/
 Description: The plugin is used for the basic website settings
-Version: 1.1.1
+Version: 1.1.2
 Author: Denis Bisteinov
 Author URI: https://bisteinoff.com
 License: GPL2
@@ -43,7 +43,7 @@ License: GPL2
 			add_action( 'admin_footer', array (&$this, 'admin_footer_js') );
 			add_action( 'admin_footer', function() {
 							wp_enqueue_style( 'db-features-admin', plugin_dir_url( __FILE__ ) . 'css/admin.css' );
-                            wp_enqueue_editor();
+							wp_enqueue_editor();
 							wp_enqueue_script( 'db-features-admin', plugin_dir_url( __FILE__ ) . 'js/admin.js', null, false, true );
 						},
 						99
