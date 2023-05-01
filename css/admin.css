@@ -59,6 +59,12 @@
     padding: 10px 30px;
 }
 
+.db-features-admin .db-features-table th {
+    font-size: 1.5em;
+    line-height: 2;
+    text-align: center;
+}
+
 .db-features-field-description {
     font-size: .9em;
     font-style: italic;
@@ -123,7 +129,7 @@
 }
 
 .db-features-image-inner img {
-    max-width: 200px;
+    max-width: 150px;
     height: auto;
 }
 
@@ -186,8 +192,42 @@
     opacity: 1;
 }
 
+.db-features-param {
+    margin: 10px 0;
+}
+
+.db-features-param label {
+    display: inline-block;
+    font-weight: 700;
+    min-width: 100px;
+}
+
 .db-center {
     text-align: center;
+}
+
+#db_features_shortcode {
+    -ms-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, .75);
+    color: #135e96;
+    font-size: 1.5em;
+    margin: 1.5em auto;
+    padding: 25px 50px;
+    text-align: center;
+    width: 300px;
+}
+
+#db_features_preview {
+    -ms-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    background: #fff;
+    margin: 1.5em 0;
+    padding: 25px;
 }
 
 @media (max-width: 1350px) {

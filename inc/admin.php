@@ -1,21 +1,6 @@
 <?php // THE SETTINGS PAGE
 
-	$db_features_num = (int) get_option('db_features_num'); // number of features, default value is 1, after adding or removing features the value changes consequently
-	$db_features_img = array(); // images of the features
-	$db_features_headline = array(); // headlines of the features
-	$db_features_text = array(); // descriptions of the features
-
-
-	// getting the data for the list of features
-	$i = -1;
-	while ( ++$i < $db_features_num ) :
-
-		$db_features_img[$i] = (int) get_option( 'db_features_img_' . $i );
-		$db_features_headline[$i] = wp_kses_post ( get_option( 'db_features_headline_' . $i ) );
-		$db_features_text[$i] = wp_kses_post ( get_option( 'db_features_text_' . $i ) );
-
-	endwhile;
-
+	require( 'data.php' ); // getting the data of the list of features
 
 	// getting the data from the form
 	if ( isset ( $_POST['submit'] ) ) :
@@ -94,6 +79,23 @@
 			}
 
 		endwhile;
+
+		// Number of columns: Desktop
+		$db_features_cols = (int) $_POST['cols'];
+		if ( $db_features_cols < 1 ) $db_features_cols = 1;
+		update_option ( 'db_features_cols', $db_features_cols );
+
+		// Number of columns: Tablet
+		$db_features_cols_tablet = (int) $_POST['cols_tablet'];
+		if ( $db_features_cols_tablet < 1 ) $db_features_cols_tablet = 1;
+		update_option ( 'db_features_cols_tablet', $db_features_cols_tablet );
+
+		// Number of columns: Mobile
+		$db_features_cols_mobile = (int) $_POST['cols_mobile'];
+		if ( $db_features_cols_mobile < 1 ) $db_features_cols_mobile = 1;
+		update_option ( 'db_features_cols_mobile', $db_features_cols_mobile );
+
+		require_once( plugin_dir_path( __FILE__ ) . '../css/custom.php' );
 
 	endif;
 
@@ -181,6 +183,33 @@
 					</div>
 				</td>
 			</tr>
+			<tr valign="top">
+				<th scope="col">
+					<?php _e('Styling' , 'db-features') ?>
+				</th>
+			</tr>
+			<tr valign="top">
+				<td id="db_features_styling" class="db-features-styling">
+					<div class="db-features-styling-item">
+						<h3><?php _e('Number of columns' , 'db-features') ?></h3>
+						<div class="db-features-param">
+							<label for="db_features_cols"><?php _e('Desktop' , 'db-features') ?></label>
+							<input type="text" name="cols" id="db_features_cols" size="5" value="<?php echo $db_features_cols ?>" />
+						</div>
+						<div class="db-features-param">
+							<label for="db_features_cols_tablet"><?php _e('Tablet' , 'db-features') ?></label>
+							<input type="text" name="cols_tablet" id="db_features_cols_tablet" size="5" value="<?php echo $db_features_cols_tablet ?>" />
+						</div>
+						<div class="db-features-param">
+							<label for="db_features_cols_mobile"><?php _e('Mobile' , 'db-features') ?></label>
+							<input type="text" name="cols_mobile" id="db_features_cols_mobile" size="5" value="<?php echo $db_features_cols_mobile ?>" />
+						</div>
+					</div>
+					<div class="db-features-styling-item">
+						
+					</div>
+				</td>
+			</tr>
 		</table>
 
 		<input type="hidden" name="num" id="db_features_num" value="<?php echo $db_features_num ?>" />
@@ -192,5 +221,27 @@
 		<?php submit_button(); ?>
 
 	</form>
+
+
+	<h2><?php _e('Shortcode', 'db-features'); ?></h2>
+
+	<div class="db-features-description">
+
+		<p><?php _e('You will want to copy and paste the shortcode where you need the block of features on your website. You may use it on any page.', 'db-features'); ?></p>
+
+		<div id="db_features_shortcode">[db-features]</div>
+
+	</div>
+
+
+	<h2><?php _e('Preview', 'db-features'); ?></h2>
+
+	<div class="db-features-description">
+
+		<p><?php _e("This is how your block of features looks like. Don't forget to save changes before you leave the page!", 'db-features'); ?></p>
+
+	</div>
+
+	<div id="db_features_preview"><?php echo do_shortcode("[db-features]") ?></div>
 
 </div>

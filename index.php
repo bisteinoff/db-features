@@ -3,7 +3,7 @@
 Plugin Name: DB Features
 Plugin URI: https://github.com/bisteinoff/db-features/
 Description: The plugin is used for the basic website settings
-Version: 1.1.2
+Version: 1.2
 Author: Denis Bisteinov
 Author URI: https://bisteinoff.com
 License: GPL2
@@ -36,9 +36,15 @@ License: GPL2
 			add_option( 'db_features_img_0' );
 			add_option( 'db_features_headline_0' );
 			add_option( 'db_features_text_0' );
+			add_option( 'db_features_cols', 3 );
+			add_option( 'db_features_cols_tablet', 2 );
+			add_option( 'db_features_cols_mobile', 1 );
 
 			add_filter( 'plugin_action_links_db-features/index.php', array(&$this, 'db_features_link') );
 			add_action( 'admin_menu', array (&$this, 'admin') );
+
+			wp_enqueue_style( 'db-features', plugin_dir_url( __FILE__ ) . 'css/style.css' );
+			wp_enqueue_style( 'db-features-custom', plugin_dir_url( __FILE__ ) . 'css/custom.min.css' );
 
 			add_action( 'admin_footer', array (&$this, 'admin_footer_js') );
 			add_action( 'admin_footer', function() {
@@ -57,7 +63,26 @@ License: GPL2
 			{
 
 				add_shortcode('db-features', function() {
-					return sanitize_text_field ( get_option('db_features_text_0') );
+
+					$html = '<div class="db-features">';
+
+					$i = -1;
+					$db_features_num = (int) get_option('db_features_num');
+					while ( ++$i < $db_features_num ) :
+
+						$html .= 
+							'<div class="db-features-box">'.
+								'<div class="db-features-box-img">' . wp_get_attachment_image ( (int) get_option( 'db_features_img_' . $i ) , 'medium' ) . '</div>' .
+								'<h3 class="db-features-box-headline">' . wp_kses_post ( get_option( 'db_features_headline_' . $i ) ) . '</h3>' .
+								'<div class="db-features-box-text">' . wp_kses_post ( get_option( 'db_features_text_' . $i ) ) . '</div>' .
+							'</div>';
+
+					endwhile;
+
+					$html .= '</div>';
+
+					return $html;
+
 				});
 
 			}

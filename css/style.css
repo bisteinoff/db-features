@@ -1,0 +1,39 @@
+/* DB Features Plugin Styling */
+
+.db-features {
+    display: -ms-flex;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.db-features-box {
+    margin: 10px 3%;
+    padding: 20px 10px;
+    text-align: center;
+}
+
+.db-features-box-img {
+    margin: 10px 0 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.db-features-box-img img {
+    max-width: 150px;
+    height: auto;
+}
+
+.db-features-box h3 {
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.db-features-box-text,
+.db-features-box-text p {
+    font-size: 16px;
+}
