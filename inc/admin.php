@@ -1,5 +1,7 @@
 <?php // THE SETTINGS PAGE
 
+	$d = 'db-features'; // domain for translate.wordpress.org
+
 	require( 'data.php' ); // getting the data of the list of features
 
 	// getting the data from the form
@@ -7,7 +9,7 @@
 
 		if ( function_exists('current_user_can') &&
 			 !current_user_can('manage_options') )
-				die( _e('Error: You do not have the permission to update the value' , 'db-features') );
+				die( _e( 'Error: You do not have the permission to update the value' , $d ) );
 
 		if ( function_exists('check_admin_referrer') )
 			check_admin_referrer('db_features_form');
@@ -80,6 +82,7 @@
 
 		endwhile;
 
+		/* Type DEFAULT (BIG) */
 		// Number of columns: Desktop
 		$db_features_cols = (int) $_POST['cols'];
 		if ( $db_features_cols < 1 ) $db_features_cols = 1;
@@ -95,6 +98,22 @@
 		if ( $db_features_cols_mobile < 1 ) $db_features_cols_mobile = 1;
 		update_option ( 'db_features_cols_mobile', $db_features_cols_mobile );
 
+		/* Type SMALL */
+		// Number of columns: Desktop
+		$db_features_small_cols = (int) $_POST['small_cols'];
+		if ( $db_features_small_cols < 1 ) $db_features_small_cols = 1;
+		update_option ( 'db_features_small_cols', $db_features_small_cols );
+
+		// Number of columns: Tablet
+		$db_features_small_cols_tablet = (int) $_POST['small_cols_tablet'];
+		if ( $db_features_small_cols_tablet < 1 ) $db_features_small_cols_tablet = 1;
+		update_option ( 'db_features_small_cols_tablet', $db_features_small_cols_tablet );
+
+		// Number of columns: Mobile
+		$db_features_small_cols_mobile = (int) $_POST['small_cols_mobile'];
+		if ( $db_features_small_cols_mobile < 1 ) $db_features_small_cols_mobile = 1;
+		update_option ( 'db_features_small_cols_mobile', $db_features_small_cols_mobile );
+
 		require_once( plugin_dir_path( __FILE__ ) . '../css/custom.php' );
 
 	endif;
@@ -102,14 +121,14 @@
 ?>
 <div class='wrap db-features-admin'>
 
-	<h1><?php _e('Features', 'db-features') ?></h1>
+	<h1><?php _e( 'Features' , $d ) ?></h1>
 
 	<div class="db-features-description">
-		<p><?php _e("The plugin is used to make a block of features for your website.", 'db-features') ?></p>
-		<p><?php _e("You will be able to easily implement it anywhere using a shortcode. So if you want to make some changes in the block later, they will be applied everywhere on your website where the block is used.", 'db-features') ?></p>
+		<p><?php _e( 'The plugin is used to make a block of features for your website.' , $d ) ?></p>
+		<p><?php _e( 'You will be able to easily implement it anywhere using a shortcode. So if you want to make some changes in the block later, they will be applied everywhere on your website where the block is used.' , $d ) ?></p>
 	</div>
 
-	<h2><?php _e('Settings', 'db-features') ?></h2>
+	<h2><?php _e( 'Settings' , $d ) ?></h2>
 
 	<form name="db-features" method="post" enctype="multipart/form-data" action="<?php echo $_SERVER['PHP_SELF'] ?>?page=db-features&amp;updated=true">
 
@@ -121,7 +140,7 @@
 		<table class="form-table db-features-table" width="100%">
 			<tr valign="top">
 				<th scope="col">
-					<?php _e('The Block of Features' , 'db-features') ?>
+					<?php _e( 'The Block of Features' , $d ) ?>
 				</th>
 			</tr>
 			<tr valign="top">
@@ -133,7 +152,7 @@
 					?>
 						<div id="db_features_item_<?php echo $i ?>" class="db-features-item">
 
-							<h3><?php _e('Image' , 'db-features') ?></h3>
+							<h3><?php _e( 'Image' , $d ) ?></h3>
 
 								<div class="db-features-image">
 									<div class="db-features-image-inner">
@@ -143,7 +162,7 @@
 												<div id="db_features_close_<?php echo $i ?>" class="db-features-close">
 													<div class="db-close-1"></div>
 													<div class="db-close-2"></div>
-													<label><?php _e('delete' , 'db-features') ?></label>
+													<label><?php _e( 'delete' , $d ) ?></label>
 												</div>
 										<?php
 												echo wp_get_attachment_image ( $db_features_img[$i], 'medium' );
@@ -155,12 +174,12 @@
 								<input type="hidden" name="img_id_<?php echo $i ?>" id="db_features_img_id_<?php echo $i ?>"
 								       value="<?php echo $db_features_img[$i] ?>" />
 
-							<h3><?php _e('Headline' , 'db-features') ?></h3>
+							<h3><?php _e( 'Headline' , $d ) ?></h3>
 
 								<input type="text" name="headline_<?php echo $i ?>" id="db_features_headline_<?php echo $i ?>" size="30"
 								       value="<?php echo $db_features_headline[$i] ?>" />
 
-							<h3><?php _e('Text' , 'db-features') ?></h3>
+							<h3><?php _e( 'Text' , $d ) ?></h3>
 
 								<?php
 									wp_editor( $db_features_text[$i], 'db-features-text-' . $i, array(
@@ -179,30 +198,62 @@
 					?>
 
 					<div id="db_features_add" class="db-features-item db-features-add">
-						<?php _e('Add Feature' , 'db-features') ?>
+						<?php _e( 'Add Feature' , $d ) ?>
 					</div>
 				</td>
 			</tr>
 			<tr valign="top">
 				<th scope="col">
-					<?php _e('Styling' , 'db-features') ?>
+					<?php _e( 'Styling' , $d ) ?>
+				</th>
+			</tr>
+			<tr valign="top">
+				<th scope="col">
+					1. <?php _e( 'Type:' , $d ) ?> <?php _e( 'Default', $d ); ?> (<?php _e( 'Big', $d ); ?>)
 				</th>
 			</tr>
 			<tr valign="top">
 				<td id="db_features_styling" class="db-features-styling">
 					<div class="db-features-styling-item">
-						<h3><?php _e('Number of columns' , 'db-features') ?></h3>
+						<h3><?php _e( 'Number of columns' , $d ) ?></h3>
 						<div class="db-features-param">
-							<label for="db_features_cols"><?php _e('Desktop' , 'db-features') ?></label>
+							<label for="db_features_cols"><?php _e( 'Desktop' , $d ) ?></label>
 							<input type="text" name="cols" id="db_features_cols" size="5" value="<?php echo $db_features_cols ?>" />
 						</div>
 						<div class="db-features-param">
-							<label for="db_features_cols_tablet"><?php _e('Tablet' , 'db-features') ?></label>
+							<label for="db_features_cols_tablet"><?php _e( 'Tablet' , $d ) ?></label>
 							<input type="text" name="cols_tablet" id="db_features_cols_tablet" size="5" value="<?php echo $db_features_cols_tablet ?>" />
 						</div>
 						<div class="db-features-param">
-							<label for="db_features_cols_mobile"><?php _e('Mobile' , 'db-features') ?></label>
+							<label for="db_features_cols_mobile"><?php _e( 'Mobile' , $d ) ?></label>
 							<input type="text" name="cols_mobile" id="db_features_cols_mobile" size="5" value="<?php echo $db_features_cols_mobile ?>" />
+						</div>
+					</div>
+					<div class="db-features-styling-item">
+						
+					</div>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="col">
+					2. <?php _e( 'Type:' , $d ) ?> <?php _e( 'Small', $d ); ?>
+				</th>
+			</tr>
+			<tr valign="top">
+				<td id="db_features_styling_small" class="db-features-styling">
+					<div class="db-features-styling-item">
+						<h3><?php _e( 'Number of columns' , $d ) ?></h3>
+						<div class="db-features-param">
+							<label for="db_features_small_cols"><?php _e( 'Desktop' , $d ) ?></label>
+							<input type="text" name="small_cols" id="db_features_small_cols" size="5" value="<?php echo $db_features_small_cols ?>" />
+						</div>
+						<div class="db-features-param">
+							<label for="db_features_small_cols_tablet"><?php _e( 'Tablet' , $d ) ?></label>
+							<input type="text" name="small_cols_tablet" id="db_features_small_cols_tablet" size="5" value="<?php echo $db_features_small_cols_tablet ?>" />
+						</div>
+						<div class="db-features-param">
+							<label for="db_features_small_cols_mobile"><?php _e( 'Mobile' , $d ) ?></label>
+							<input type="text" name="small_cols_mobile" id="db_features_small_cols_mobile" size="5" value="<?php echo $db_features_small_cols_mobile ?>" />
 						</div>
 					</div>
 					<div class="db-features-styling-item">
@@ -223,25 +274,68 @@
 	</form>
 
 
-	<h2><?php _e('Shortcode', 'db-features'); ?></h2>
+	<h2><?php _e( 'Shortcode' , $d ); ?></h2>
 
 	<div class="db-features-description">
 
-		<p><?php _e('You will want to copy and paste the shortcode where you need the block of features on your website. You may use it on any page.', 'db-features'); ?></p>
+		<p><?php _e( 'You will want to copy and paste the shortcode where you need the block of features on your website. You may use it on any page.' , $d ); ?></p>
 
-		<div id="db_features_shortcode">[db-features]</div>
+		<div class="db_features_shortcode">[db-features]</div>
+
+		<h3><?php _e( 'Parameters' , $d ); ?></h3>
+
+		<table class="db-features-table" width="100%">
+			<tr valign="top">
+				<th scope="col" width="50%">
+					<?php _e( 'Shortcode' , $d ) ?>
+				</th>
+				<th scope="col" width="50%">
+					<?php _e( 'Description' , $d ) ?>
+				</th>
+			</tr>
+			<tr valign="top">
+				<td>
+					<p>[db-features]</p>
+				</td>
+				<td>
+					<p><?php _e( 'Default block of features', $d ); ?>. <?php _e( 'Good for the home page.', $d ); ?></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td>
+					<p>[db-features type="big"]</p>
+				</td>
+				<td>
+					<p><?php _e( 'Same as', $d ); ?> [db-features]</p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td>
+					<p>[db-features type="small"]</p>
+				</td>
+				<td>
+					<p><?php _e( 'Smaller version of the block of features', $d ); ?>. <?php _e( 'Good for the inner pages under the header or above the footer.', $d ); ?></p>
+				</td>
+			</tr>
+		</table>
 
 	</div>
 
 
-	<h2><?php _e('Preview', 'db-features'); ?></h2>
+	<h2><?php _e( 'Preview', $d ); ?></h2>
 
 	<div class="db-features-description">
 
-		<p><?php _e("This is how your block of features looks like. Don't forget to save changes before you leave the page!", 'db-features'); ?></p>
+		<p><?php _e( "This is how your block of features looks like. Don't forget to save changes before you leave the page!", $d ); ?></p>
 
 	</div>
+    
+	<h3><?php _e( 'Default', $d ); ?> (<?php _e( 'Big', $d ); ?>)</h3>
 
-	<div id="db_features_preview"><?php echo do_shortcode("[db-features]") ?></div>
+	<div class="db_features_preview"><?php echo do_shortcode('[db-features]') ?></div>
+    
+	<h3><?php _e( 'Small', $d ); ?></h3>
+
+	<div class="db_features_preview"><?php echo do_shortcode('[db-features type="small"]') ?></div>
 
 </div>

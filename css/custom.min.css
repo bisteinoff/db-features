@@ -1,1 +1,1 @@
-.db-features-box {width:calc(27.33333333% - 20px);}@media(max-width:768px){.db-features-box {width:calc(44% - 20px);}}@media(max-width:480px){.db-features-box {width:calc(94% - 20px);}}
+.db-features-box{width:calc(27.33333333% - 20px);}.db-features-box.db-features-type-small{width:calc(14.66666667% - 10px);}@media(max-width:768px){.db-features-box{width:calc(44% - 20px);}.db-features-box.db-features-type-small{width:calc(31.33333333% - 10px);}}@media(max-width:480px){.db-features-box{width:calc(94% - 20px);}.db-features-.db-features-type-small{width:calc(48% - 10px);}}

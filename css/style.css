@@ -30,10 +30,31 @@
 
 .db-features-box h3 {
     font-size: 20px;
+    line-height: 1.5;
     text-transform: uppercase;
 }
 
 .db-features-box-text,
 .db-features-box-text p {
     font-size: 16px;
+    line-height: 1.5;
+}
+
+.db-features-box.db-features-type-small {
+    margin: 10px 1%;
+    padding: 5px;
+}
+
+.db-features-box.db-features-type-small .db-features-box-img img {
+    max-width: 80px;
+    height: auto;
+}
+
+.db-features-box.db-features-type-small h3 {
+    font-size: 15px;
+}
+
+.db-features-box.db-features-type-small .db-features-box-text,
+.db-features-box.db-features-type-small .db-features-box-text p {
+    font-size: 13px;
 }

@@ -9,6 +9,11 @@
     margin-top: 2em;
 }
 
+.db-features-admin h3 {
+    font-size: 1.75em;
+    margin-top: 1.75em;
+}
+
 .db-features-description p {
     color: #525d65;
     font-size: 1.5em;
@@ -57,6 +62,16 @@
     border-left: 1px solid #eee;
     border-bottom: 1px solid #eee;
     padding: 10px 30px;
+}
+
+.db-features-admin .db-features-table th:first-child,
+.db-features-admin .db-features-table td:first-child {
+    border-left: 0;
+}
+
+.db-features-admin .db-features-table tr:last-child th,
+.db-features-admin .db-features-table tr:last-child td {
+    border-bottom: 0;
 }
 
 .db-features-admin .db-features-table th {
@@ -202,11 +217,7 @@
     min-width: 100px;
 }
 
-.db-center {
-    text-align: center;
-}
-
-#db_features_shortcode {
+.db_features_shortcode {
     -ms-border-radius: 25px;
     -moz-border-radius: 25px;
     -webkit-border-radius: 25px;
@@ -220,7 +231,7 @@
     width: 300px;
 }
 
-#db_features_preview {
+.db_features_preview {
     -ms-border-radius: 25px;
     -moz-border-radius: 25px;
     -webkit-border-radius: 25px;
@@ -228,6 +239,10 @@
     background: #fff;
     margin: 1.5em 0;
     padding: 25px;
+}
+
+.db-center {
+    text-align: center;
 }
 
 @media (max-width: 1350px) {

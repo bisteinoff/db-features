@@ -20,3 +20,6 @@
 	$db_features_cols = (int) get_option( 'db_features_cols' );
 	$db_features_cols_tablet = (int) get_option( 'db_features_cols_tablet' );
 	$db_features_cols_mobile = (int) get_option( 'db_features_cols_mobile' );
+	$db_features_small_cols = (int) get_option( 'db_features_small_cols' );
+	$db_features_small_cols_tablet = (int) get_option( 'db_features_small_cols_tablet' );
+	$db_features_small_cols_mobile = (int) get_option( 'db_features_small_cols_mobile' );

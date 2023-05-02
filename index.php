@@ -3,7 +3,7 @@
 Plugin Name: DB Features
 Plugin URI: https://github.com/bisteinoff/db-features/
 Description: The plugin is used for the basic website settings
-Version: 1.2
+Version: 1.3
 Author: Denis Bisteinov
 Author URI: https://bisteinoff.com
 License: GPL2
@@ -39,6 +39,9 @@ License: GPL2
 			add_option( 'db_features_cols', 3 );
 			add_option( 'db_features_cols_tablet', 2 );
 			add_option( 'db_features_cols_mobile', 1 );
+			add_option( 'db_features_small_cols', 6 );
+			add_option( 'db_features_small_cols_tablet', 3 );
+			add_option( 'db_features_small_cols_mobile', 2 );
 
 			add_filter( 'plugin_action_links_db-features/index.php', array(&$this, 'db_features_link') );
 			add_action( 'admin_menu', array (&$this, 'admin') );
@@ -61,31 +64,37 @@ License: GPL2
 
 			if (function_exists ('add_shortcode') )
 			{
-
-				add_shortcode('db-features', function() {
-
-					$html = '<div class="db-features">';
-
-					$i = -1;
-					$db_features_num = (int) get_option('db_features_num');
-					while ( ++$i < $db_features_num ) :
-
-						$html .= 
-							'<div class="db-features-box">'.
-								'<div class="db-features-box-img">' . wp_get_attachment_image ( (int) get_option( 'db_features_img_' . $i ) , 'medium' ) . '</div>' .
-								'<h3 class="db-features-box-headline">' . wp_kses_post ( get_option( 'db_features_headline_' . $i ) ) . '</h3>' .
-								'<div class="db-features-box-text">' . wp_kses_post ( get_option( 'db_features_text_' . $i ) ) . '</div>' .
-							'</div>';
-
-					endwhile;
-
-					$html .= '</div>';
-
-					return $html;
-
-				});
-
+				add_shortcode('db-features', array(&$this, 'shortcode') );
 			}
+
+		}
+
+		function shortcode( $attr ) {
+
+			$attr = shortcode_atts( [
+				'type' => 'big'
+			], $attr );
+
+			$type = $attr['type'];
+
+			$html = '<div class="db-features">';
+
+			$i = -1;
+			$db_features_num = (int) get_option('db_features_num');
+			while ( ++$i < $db_features_num ) :
+
+				$html .= 
+					'<div class="db-features-box db-features-type-' . $type . '">'.
+						'<div class="db-features-box-img">' . wp_get_attachment_image ( (int) get_option( 'db_features_img_' . $i ) , 'medium' ) . '</div>' .
+						'<h3 class="db-features-box-headline">' . wp_kses_post ( get_option( 'db_features_headline_' . $i ) ) . '</h3>' .
+						'<div class="db-features-box-text">' . wp_kses_post ( get_option( 'db_features_text_' . $i ) ) . '</div>' .
+					'</div>';
+
+			endwhile;
+
+			$html .= '</div>';
+
+			return $html;
 
 		}
 
