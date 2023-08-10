@@ -144,6 +144,7 @@
 }
 
 .db-features-image-inner img {
+    min-width: 50px;
     max-width: 150px;
     height: auto;
 }
@@ -205,6 +206,19 @@
 
 .db-features-close:hover label{
     opacity: 1;
+}
+
+.db-features-box-headline {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+.db-features-box-text,
+.db-features-box-text p {
+    font-size: 16px;
+    line-height: 1.5;
 }
 
 .db-features-param {

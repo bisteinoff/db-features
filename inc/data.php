@@ -23,3 +23,5 @@
 	$db_features_small_cols = (int) get_option( 'db_features_small_cols' );
 	$db_features_small_cols_tablet = (int) get_option( 'db_features_small_cols_tablet' );
 	$db_features_small_cols_mobile = (int) get_option( 'db_features_small_cols_mobile' );
+	$db_features_htmltag_headline = sanitize_text_field( get_option( 'db_features_htmltag_headline' ) );
+	$db_features_htmltag_text = sanitize_text_field( get_option( 'db_features_htmltag_text' ) );

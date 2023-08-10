@@ -3,13 +3,13 @@
 Plugin Name: DB Features
 Plugin URI: https://github.com/bisteinoff/db-features/
 Description: The plugin is used for the basic website settings
-Version: 1.3
+Version: 1.3.1
 Author: Denis Bisteinov
 Author URI: https://bisteinoff.com
 License: GPL2
 */
 
-/*  Copyright YEAR  PLUGIN_AUTHOR_NAME  (email : bisteinoff@gmail.com)
+/*  Copyright 2023  Denis BISTEINOV  (email : bisteinoff@gmail.com)
  
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -42,6 +42,8 @@ License: GPL2
 			add_option( 'db_features_small_cols', 6 );
 			add_option( 'db_features_small_cols_tablet', 3 );
 			add_option( 'db_features_small_cols_mobile', 2 );
+			add_option( 'db_features_htmltag_headline', 'h3' );
+			add_option( 'db_features_htmltag_text', 'div' );
 
 			add_filter( 'plugin_action_links_db-features/index.php', array(&$this, 'db_features_link') );
 			add_action( 'admin_menu', array (&$this, 'admin') );
@@ -79,6 +81,12 @@ License: GPL2
 
 			$html = '<div class="db-features">';
 
+			$valid_htmltags = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'p');
+			$db_features_htmltag_headline = sanitize_text_field( get_option( 'db_features_htmltag_headline' ) );
+			$db_features_htmltag_text     = sanitize_text_field( get_option( 'db_features_htmltag_text'     ) );
+			$tag_headline = ( in_array( $db_features_htmltag_headline, $valid_htmltags ) ? $db_features_htmltag_headline : 'h3'  );
+			$tag_text     = ( in_array( $db_features_htmltag_text,     $valid_htmltags ) ? $db_features_htmltag_text     : 'div' );
+
 			$i = -1;
 			$db_features_num = (int) get_option('db_features_num');
 			while ( ++$i < $db_features_num ) :
@@ -86,8 +94,8 @@ License: GPL2
 				$html .= 
 					'<div class="db-features-box db-features-type-' . $type . '">'.
 						'<div class="db-features-box-img">' . wp_get_attachment_image ( (int) get_option( 'db_features_img_' . $i ) , 'medium' ) . '</div>' .
-						'<h3 class="db-features-box-headline">' . wp_kses_post ( get_option( 'db_features_headline_' . $i ) ) . '</h3>' .
-						'<div class="db-features-box-text">' . wp_kses_post ( get_option( 'db_features_text_' . $i ) ) . '</div>' .
+						'<' . $tag_headline . ' class="db-features-box-headline">' . wp_kses_post ( get_option( 'db_features_headline_' . $i ) ) . '</' . $tag_headline . '>' .
+						'<' . $tag_text . ' class="db-features-box-text">' . wp_kses_post ( get_option( 'db_features_text_' . $i ) ) . '</' . $tag_text . '>' .
 					'</div>';
 
 			endwhile;

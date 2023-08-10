@@ -114,6 +114,16 @@
 		if ( $db_features_small_cols_mobile < 1 ) $db_features_small_cols_mobile = 1;
 		update_option ( 'db_features_small_cols_mobile', $db_features_small_cols_mobile );
 
+		// HTML tag: Headline
+		$db_features_htmltag_headline = sanitize_text_field( $_POST['htmltag_headline'] );
+		if ( empty ( $db_features_htmltag_headline ) ) $db_features_htmltag_headline = 'h3';
+		update_option ( 'db_features_htmltag_headline', $db_features_htmltag_headline );
+
+		// HTML tag: Text
+		$db_features_htmltag_text = sanitize_text_field( $_POST['htmltag_text'] );
+		if ( empty ( $db_features_htmltag_text ) ) $db_features_htmltag_text = 'h3';
+		update_option ( 'db_features_htmltag_text', $db_features_htmltag_text );
+
 		require_once( plugin_dir_path( __FILE__ ) . '../css/custom.php' );
 
 	endif;
@@ -230,6 +240,9 @@
 						</div>
 					</div>
 					<div class="db-features-styling-item">
+
+					</div>
+					<div class="db-features-styling-item">
 						
 					</div>
 				</td>
@@ -255,6 +268,53 @@
 							<label for="db_features_small_cols_mobile"><?php _e( 'Mobile' , $d ) ?></label>
 							<input type="text" name="small_cols_mobile" id="db_features_small_cols_mobile" size="5" value="<?php echo $db_features_small_cols_mobile ?>" />
 						</div>
+					</div>
+					<div class="db-features-styling-item">
+						
+					</div>
+					<div class="db-features-styling-item">
+						
+					</div>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="col">
+					<?php _e( 'All types' , $d ) ?>
+				</th>
+			</tr>
+			<tr valign="top">
+				<td id="db_features_styling" class="db-features-styling">
+					<div class="db-features-styling-item">
+						<h3><?php _e( 'HTML tags' , $d ) ?></h3>
+						<div class="db-features-param">
+							<label for="db_features_htmltag_headline"><?php _e( 'Headline' , $d ) ?></label>
+							<select type="text" name="htmltag_headline" id="db_features_htmltag_headline">
+								<option value="h1"  <?php selected( $db_features_htmltag_headline, 'h1'  ); ?>>H1</option>
+								<option value="h2"  <?php selected( $db_features_htmltag_headline, 'h2'  ); ?>>H2</option>
+								<option value="h3"  <?php selected( $db_features_htmltag_headline, 'h3'  ); ?>>H3</option>
+								<option value="h4"  <?php selected( $db_features_htmltag_headline, 'h4'  ); ?>>H4</option>
+								<option value="h5"  <?php selected( $db_features_htmltag_headline, 'h5'  ); ?>>H5</option>
+								<option value="h6"  <?php selected( $db_features_htmltag_headline, 'h6'  ); ?>>H6</option>
+								<option value="div" <?php selected( $db_features_htmltag_headline, 'div' ); ?>>DIV</option>
+								<option value="p"   <?php selected( $db_features_htmltag_headline, 'p'   ); ?>>P</option>
+							</select>
+						</div>
+						<div class="db-features-param">
+							<label for="db_features_htmltag_text"><?php _e( 'Text' , $d ) ?></label>
+							<select type="text" name="htmltag_text" id="db_features_htmltag_text">
+								<option value="h1"  <?php selected( $db_features_htmltag_text, 'h1'  ); ?>>H1</option>
+								<option value="h2"  <?php selected( $db_features_htmltag_text, 'h2'  ); ?>>H2</option>
+								<option value="h3"  <?php selected( $db_features_htmltag_text, 'h3'  ); ?>>H3</option>
+								<option value="h4"  <?php selected( $db_features_htmltag_text, 'h4'  ); ?>>H4</option>
+								<option value="h5"  <?php selected( $db_features_htmltag_text, 'h5'  ); ?>>H5</option>
+								<option value="h6"  <?php selected( $db_features_htmltag_text, 'h6'  ); ?>>H6</option>
+								<option value="div" <?php selected( $db_features_htmltag_text, 'div' ); ?>>DIV</option>
+								<option value="p"   <?php selected( $db_features_htmltag_text, 'p'   ); ?>>P</option>
+							</select>
+						</div>
+					</div>
+					<div class="db-features-styling-item">
+						
 					</div>
 					<div class="db-features-styling-item">
 						

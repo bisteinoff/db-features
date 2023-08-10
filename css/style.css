@@ -24,12 +24,14 @@
 }
 
 .db-features-box-img img {
+    min-width: 50px;
     max-width: 150px;
     height: auto;
 }
 
-.db-features-box h3 {
+.db-features-box-headline {
     font-size: 20px;
+    font-weight: 700;
     line-height: 1.5;
     text-transform: uppercase;
 }
@@ -50,7 +52,7 @@
     height: auto;
 }
 
-.db-features-box.db-features-type-small h3 {
+.db-features-box.db-features-type-small .db-features-box-headline {
     font-size: 15px;
 }
 
