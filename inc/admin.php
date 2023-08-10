@@ -1,6 +1,7 @@
 <?php // THE SETTINGS PAGE
 
-	$d = 'db-features'; // domain for translate.wordpress.org
+	$db_features = new dbFeatures();
+	$d = $db_features -> thisdir(); // domain for translate.wordpress.org
 
 	require( 'data.php' ); // getting the data of the list of features
 
