@@ -3,7 +3,7 @@
 Plugin Name: DB Features
 Plugin URI: https://github.com/bisteinoff/db-features/
 Description: The plugin is used for the basic website settings
-Version: 1.3.2
+Version: 1.3.3
 Author: Denis Bisteinov
 Author URI: https://bisteinoff.com
 License: GPL2

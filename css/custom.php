@@ -19,19 +19,19 @@
 	$width_small_mobile = ( $small_cols_mobile === 1 ? 100 : round ( 100 / $small_cols_mobile , 8 ) );
 
 	// Desktop
-	$db_css .= ".db-features-box{width:calc(" . ( $width - 6 ) . "% - 20px);}" . // 3% margin-left and margin-right, 10px padding-left and padding-right
-	           ".db-features-box.db-features-type-small{width:calc(" . ( $width_small - 2 ) . "% - 10px);}"; // 1% margin-left and margin-right, 5px padding-left and padding-right
+	$db_css .= ".db-features-box{width:" . ( $width - 6 ) . "%}" . // 3% margin-left and margin-right
+	           ".db-features-box.db-features-type-small{width:" . ( $width_small - 2 ) . "%}"; // 1% margin-left and margin-right
 
 	// Tablet
 	$db_css .= "@media(max-width:768px){" .
-	           ".db-features-box{width:calc(" . ( $width_tablet - 6 ) . "% - 20px);}" .
-	           ".db-features-box.db-features-type-small{width:calc(" . ( $width_small_tablet - 2 ) . "% - 10px);}" .
+	           ".db-features-box{width:" . ( $width_tablet - 6 ) . "%}" .
+	           ".db-features-box.db-features-type-small{width:" . ( $width_small_tablet - 2 ) . "%}" .
 	           "}";
 
 	// Mobile
 	$db_css .= "@media(max-width:480px){" .
-	           ".db-features-box{width:calc(" . ( $width_mobile - 6 ) . "% - 20px);}" .
-	           ".db-features-.db-features-type-small{width:calc(" . ( $width_small_mobile - 2 ) . "% - 10px);}" .
+	           ".db-features-box{width:" . ( $width_mobile - 6 ) . "%}" .
+	           ".db-features-box.db-features-type-small{width:" . ( $width_small_mobile - 2 ) . "%}" .
 	           "}";
 
 	if ( file_exists ( $db_link ) )
