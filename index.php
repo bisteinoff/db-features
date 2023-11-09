@@ -3,7 +3,7 @@
 Plugin Name: DB Features
 Plugin URI: https://github.com/bisteinoff/db-features/
 Description: The plugin is used for the basic website settings
-Version: 1.3.3
+Version: 1.3.4
 Author: Denis Bisteinov
 Author URI: https://bisteinoff.com
 License: GPL2
@@ -25,16 +25,18 @@ License: GPL2
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+	if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 	class dbFeatures
 
 	{
 
-		function thisdir()
+		public function thisdir()
 		{
 			return basename( __DIR__ );
 		}
 
-		function dbFeatures()
+		public function __construct()
 		{
 
 			add_option( 'db_features_num', 1 ); // number of features
@@ -53,18 +55,18 @@ License: GPL2
 			add_filter( 'plugin_action_links_' . $this->thisdir() . '/index.php', array(&$this, 'db_features_link') );
 			add_action( 'admin_menu', array (&$this, 'admin') );
 
-			wp_enqueue_style( $this->thisdir(), plugin_dir_url( __FILE__ ) . 'css/style.css' );
-			wp_enqueue_style( $this->thisdir() . '-custom', plugin_dir_url( __FILE__ ) . 'css/custom.min.css' );
+			add_action( 'wp_enqueue_scripts', function() {
+							wp_enqueue_style( $this->thisdir(), plugin_dir_url( __FILE__ ) . 'css/style.css' );
+							wp_enqueue_style( $this->thisdir() . '-custom', plugin_dir_url( __FILE__ ) . 'css/custom.min.css' );
+						},
+						99
+			);
 
 			add_action( 'admin_footer', array (&$this, 'admin_footer_js') );
 			add_action( 'admin_footer', function() {
 							wp_enqueue_style( $this->thisdir() . '-admin', plugin_dir_url( __FILE__ ) . 'css/admin.css' );
 							wp_enqueue_editor();
 							wp_enqueue_script( $this->thisdir() . '-admin', plugin_dir_url( __FILE__ ) . 'js/admin.js', null, false, true );
-						},
-						99
-			);
-			add_action( 'admin_enqueue_scripts', function() {
 						},
 						99
 			);
@@ -76,7 +78,7 @@ License: GPL2
 
 		}
 
-		function shortcode( $attr ) {
+		public function shortcode( $attr ) {
 
 			$attr = shortcode_atts( [
 				'type' => 'big'
@@ -87,8 +89,8 @@ License: GPL2
 			$html = '<div class="db-features">';
 
 			$valid_htmltags = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'p');
-			$db_features_htmltag_headline = sanitize_text_field( get_option( 'db_features_htmltag_headline' ) );
-			$db_features_htmltag_text     = sanitize_text_field( get_option( 'db_features_htmltag_text'     ) );
+			$db_features_htmltag_headline = esc_html ( sanitize_text_field( get_option( 'db_features_htmltag_headline' ) ) );
+			$db_features_htmltag_text     = esc_html ( sanitize_text_field( get_option( 'db_features_htmltag_text'     ) ) );
 			$tag_headline = ( in_array( $db_features_htmltag_headline, $valid_htmltags ) ? $db_features_htmltag_headline : 'h3'  );
 			$tag_text     = ( in_array( $db_features_htmltag_text,     $valid_htmltags ) ? $db_features_htmltag_text     : 'div' );
 
@@ -111,7 +113,7 @@ License: GPL2
 
 		}
 
-		function admin() {
+		public function admin() {
 
 			if ( function_exists('add_menu_page') )
 			{
@@ -134,15 +136,13 @@ License: GPL2
 
 		}
 
-		function admin_page_callback()
-		{
+		public function admin_page_callback() {
 
 			require_once('inc/admin.php');
 
 		}
 
-		function db_features_link( $links )
-		{
+		public function db_features_link( $links ) {
 
 			$url = esc_url ( add_query_arg (
 				'page',
@@ -161,8 +161,7 @@ License: GPL2
 
 		}
 
-		function admin_footer_js()
-		{
+		public function admin_footer_js() {
 			?>
 				<script type="text/javascript">
 					let dbFeaturesTexts = Array (

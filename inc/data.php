@@ -1,5 +1,7 @@
 <?php // THE DATA FOR THE LIST OF FEATURES
 
+	if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 	$db_features_num = (int) get_option( 'db_features_num' ); // number of features, default value is 1, after adding or removing features the value changes consequently
 	$db_features_img = array(); // images of the features
 	$db_features_headline = array(); // headlines of the features
@@ -23,5 +25,5 @@
 	$db_features_small_cols = (int) get_option( 'db_features_small_cols' );
 	$db_features_small_cols_tablet = (int) get_option( 'db_features_small_cols_tablet' );
 	$db_features_small_cols_mobile = (int) get_option( 'db_features_small_cols_mobile' );
-	$db_features_htmltag_headline = sanitize_text_field( get_option( 'db_features_htmltag_headline' ) );
-	$db_features_htmltag_text = sanitize_text_field( get_option( 'db_features_htmltag_text' ) );
+	$db_features_htmltag_headline = esc_html ( sanitize_text_field( get_option( 'db_features_htmltag_headline' ) ) );
+	$db_features_htmltag_text = esc_html ( sanitize_text_field( get_option( 'db_features_htmltag_text' ) ) );

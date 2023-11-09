@@ -1,5 +1,7 @@
 <?php
 
+	if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 	$db_css = '';
 	$db_link = plugin_dir_path( __FILE__ ) . 'custom.min.css';
 	$cols = (int) get_option( 'db_features_cols' );
@@ -33,6 +35,32 @@
 	           ".db-features-box{width:" . ( $width_mobile - 6 ) . "%}" .
 	           ".db-features-box.db-features-type-small{width:" . ( $width_small_mobile - 2 ) . "%}" .
 	           "}";
+
+/*	if ( $fontsize > 0 )
+		$db_css .= "font-size:" . $fontsize . "px;";
+
+	if ( $fontweight > 0 ) {
+
+		switch ( $fontweight ) {
+
+			case 1 : $db_css .= "font-weight:700;";
+			break;
+
+			case 2 : $db_css .= "font-style:italic;";
+			break;
+
+			case 3 : $db_css .= "font-weight:700;font-style:italic;";
+			break;
+
+		}
+
+	}
+
+	if ( $borderwidth !== '' && $borderwidth >= 0 )
+		$db_css .= "border-width:" . $borderwidth . "px;";
+
+	if ( $color !== '' )
+		$db_css .= "border-color:{$color};color:{$color}";*/
 
 	if ( file_exists ( $db_link ) )
 		wp_delete_file ( $db_link );
